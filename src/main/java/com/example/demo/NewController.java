@@ -6,9 +6,8 @@ import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
@@ -28,16 +27,23 @@ public class NewController {
     @Autowired
     private NewService newService;
 
-    @GetMapping("/search/{user}")
-    public String search(@PathVariable String user, Model model) {
+    @GetMapping({"", "/"})
+    public String index(){
+        ModelAndView mv = new ModelAndView("book/form");
+        mv.addObject("work", new Worker());
+        return "index";
+    }
+
+    @GetMapping(value = "/search/name", params = "name")
+    public String search(@RequestParam String name, Model model) {
         try {
 
             try {
 
-                url = new URL("https://adm.edu.p.lodz.pl/user/users.php?search=" + user);
+                url = new URL("https://adm.edu.p.lodz.pl/user/users.php?search=" + name);
                 users = newService.generate(url);
                 model.addAttribute("workersList", users);
-                model.addAttribute("name", user);
+                model.addAttribute("name", name);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }

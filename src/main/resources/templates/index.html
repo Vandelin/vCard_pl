@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th = "http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Search for...</title>
+</head>
+<body>
+
+<form th:action="@{'/search/name' (name = ${name})}">
+    <p>Input name or/and family name: <input type="text" name="name" th:value="${name}"/></p>
+<button type="submit" > Search </button>
+</form>
+
+
+</body>
+</html>
