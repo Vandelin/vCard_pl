@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Searched: </title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th> id</th>
+        <th> Nazwisko</th>
+        <th> Imie</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="worker : ${workersList}">
+        <td><span th:text="${worker.id}"> id </span></td>
+        <td><span th:text="${worker.familyName}"> Nazwisko </span></td>
+        <td><span th:text="${worker.givenName}"> Imie </span></td>
+        <td>
+            <form th:action="@{'/download/{id}'(id=${worker.id})}">
+                <button type="submit"><b>Generate</b></button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
